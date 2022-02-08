@@ -43,6 +43,9 @@ void Customer::buy_car(std::vector<Auto>& vec,
 	}
 	if (digit) {
 		if (id.size() < 10 && std::stoi(id) > 0) {
+			// temp-obj is an object to which the id of the required machine is assigned, 
+			// after the search for this machine goes by temp-obj and all the parameters 
+			// of the machine are assigned to temp-obj
 			Auto temp;
 			temp.set_id(std::stoi(id));
 
@@ -50,6 +53,7 @@ void Customer::buy_car(std::vector<Auto>& vec,
 				if (std::find(vec.begin(), vec.end(), temp) != vec.end()) {
 					// Find car with entered id
 					auto it = std::find(vec.begin(), vec.end(), temp);
+					// all parameters of the machine are assigned to temp-obj 
 					temp = *it;
 
 					// Adding the car to the list purchased by the buyer
@@ -66,7 +70,7 @@ void Customer::buy_car(std::vector<Auto>& vec,
 					// display a list of machines to the user
 					show_customer_car();
 
-					// checking whether there are no more cars in the list
+					// checking whether there are no more cars in the car list
 					if (vec.empty()) {
 						is_generated = false;
 					}

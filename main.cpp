@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <sstream>
+#include <regex>
 
 #include "Auto.h"
 #include "Customer.h"
@@ -8,6 +9,7 @@
 using std::cin;
 using std::cout;
 using std::endl;
+
 
 void start() {
 	// Greeting and showing the user a hint 
@@ -27,13 +29,12 @@ void start() {
 	// string saying that there are no cars in the list
 	std::string empty_list{ "The list is empty! Please generate a list of cars!" };
 
-	// for close the program
-	bool work = true;
-
-	while (work) {
+	while (true) {
 		std::getline(cin, input);
 		std::istringstream is(input);
 
+		// removing extra spaces
+		input.erase(remove_if(input.begin(), input.end(), isspace), input.end());
 		// checking for an empty string
 		if (input.empty()) {
 			customer.show_info_string("Enter the command!");
@@ -52,7 +53,6 @@ void start() {
 		}
 		// command exit
 		else if (split.at(0) == "exit") {
-			work = false;
 			customer.show_info_string("Thank you for visiting our salon!");
 			break;
 		}
@@ -140,7 +140,7 @@ void start() {
 		}
 		// command buy
 		else if (split.at(0) == "buy") {
-			// Checking for the use of 3 words in a command show 
+			// Checking for the use of 3 words in a command buy 
 			// and the second word is car
 			if (split.size() == 3 && split.at(1) == "car") {
 				if (!split.at(2).empty()) {
